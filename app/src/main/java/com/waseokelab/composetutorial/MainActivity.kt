@@ -4,31 +4,32 @@ import android.os.Bundle
 import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.waseokelab.composetutorial.ui.theme.ComposeTutorialTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MessageCard("Android")
+            MessageCard(Message("Android","Jetpack Compose"))
         }
     }
 }
 
+data class Message(val author: String, val body: String)
+
 @Composable
-fun MessageCard(name: String) {
-    Text(text = "Hello $name!")
+fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
+    Text(text = msg.author)
+    Text(text = msg.body)
 }
 
 @Preview
 @Composable
 fun PreviewMessageCard(){
-    MessageCard("Android")
+    MessageCard(
+        msg = Message("Colleague", "Hey, take a look at Jetpack Compose")
+    )
 }
