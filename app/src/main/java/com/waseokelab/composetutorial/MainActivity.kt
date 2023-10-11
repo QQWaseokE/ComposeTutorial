@@ -2,14 +2,12 @@ package com.waseokelab.composetutorial
 
 import android.os.Bundle
 import androidx.compose.foundation.Image
-import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,12 +19,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.waseokelab.composetutorial.ui.theme.ComposeTutorialTheme
 import android.content.res.Configuration
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 
 
 class MainActivity : ComponentActivity() {
@@ -34,9 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeTutorialTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    MessageCard(Message("Android","Jetpack Compose"))
-                }
+                Conversation(SampleData.conversationSample)
             }
         }
     }
@@ -77,6 +74,15 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
     }
 }
 
+@Composable
+fun Conversation(message: List<Message>){
+    LazyColumn{
+        items(message){ message ->
+            MessageCard(message)
+        }
+    }
+}
+
 @Preview(name = "Light Mode")
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -84,12 +90,9 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
     name = "Dark Mode"
 )
 @Composable
-fun PreviewMessageCard(){
+fun PreviewConversation(){
     ComposeTutorialTheme {
-        Surface {
-            MessageCard(
-                msg = Message("Android", "Jetpact Comopose"))
-        }
+        Conversation(SampleData.conversationSample)
     }
 }
 
