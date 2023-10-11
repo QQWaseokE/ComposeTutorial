@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.waseokelab.composetutorial.ui.theme.ComposeTutorialTheme
 import android.content.res.Configuration
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -63,6 +65,10 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
         //We keep track if the message is expanded or not in this
         //variable
         var isExpanded by remember { mutableStateOf(false) }
+        //surfaceColor will be updated gradually from one color to the other
+        val surfaceColor by animateColorAsState(
+            if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+        )
 
         //We toggle the isExpanded variable when we click on this Column
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }){
@@ -76,7 +82,11 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
 
             Surface(
                 shape = MaterialTheme.shapes.medium,
-                shadowElevation = 1.dp
+                shadowElevation = 1.dp,
+                // surfaceColor color will be changing gradually from primary to surface
+                color = surfaceColor,
+                // animateContentSize will change the Surface size gradually
+            modifier = Modifier.animateContentSize().padding(1.dp)
             ) {
                 Text(
                     text = msg.body,
