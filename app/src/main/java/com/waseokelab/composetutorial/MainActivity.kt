@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.waseokelab.composetutorial.ui.theme.ComposeTutorialTheme
+import android.content.res.Configuration
 
 
 class MainActivity : ComponentActivity() {
@@ -76,7 +77,12 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
     }
 }
 
-@Preview
+@Preview(name = "Light Mode")
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Dark Mode"
+)
 @Composable
 fun PreviewMessageCard(){
     ComposeTutorialTheme {
@@ -86,3 +92,4 @@ fun PreviewMessageCard(){
         }
     }
 }
+
