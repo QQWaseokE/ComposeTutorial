@@ -61,11 +61,14 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
         Column{
             Text(
                 text = msg.author,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleLarge
             )
 
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
+            Text(
+                text = msg.body,
+                style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
