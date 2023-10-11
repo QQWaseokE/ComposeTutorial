@@ -45,7 +45,6 @@ data class Message(val author: String, val body: String)
 
 @Composable
 fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
-    // Add padding around our message
     Row(modifier = Modifier.padding(all = 8.dp)){
         Image(
             painter = painterResource(R.drawable.profile_picture),
@@ -66,9 +65,13 @@ fun MessageCard(msg: com.waseokelab.composetutorial.Message) {
             )
 
             Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = msg.body,
-                style = MaterialTheme.typography.bodyLarge)
+
+            Surface(shape = MaterialTheme.shapes.medium, shadowElevation = 1.dp){
+                Text(
+                    text = msg.body,
+                    modifier = Modifier.padding(all = 4.dp),
+                    style = MaterialTheme.typography.bodyLarge)
+            }
         }
     }
 }
